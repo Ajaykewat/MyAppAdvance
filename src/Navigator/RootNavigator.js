@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import ChartList from '../screens/ChartList';
@@ -28,14 +28,54 @@ import {
   ZeroLineChartScreen 
  } from '../ChartsScreen';
 import ChartsExplorer from '../ChartsScreen/ChartsListScreen';
+import GlobalModal, { ModalController } from "react-native-global-modal-2"
+import Profile from '../screens/LensUI/Profiles';
+import ViewComments from '../screens/LensUI/ViewComments';
+import ViewFollowing from '../screens/LensUI/ViewFollowing';
+import ProfileView from '../screens/LensUI/ViewProfile';
+import ProfileViewD from '../screens/LensUI/ViewProfileDarkTheme';
 
 
 
 const Stack = createNativeStackNavigator();
 const RootNavigator = () => {
+
+
+  const data: ModalData = {
+    title: 'Update available',
+    description: 'A new software version is available for download',
+    primaryButtonText: 'Update',
+    outlineButtonText: 'Not now',
+    // titleProps: {
+    //   imageSource: require('./assets/cross.png'),
+    // },
+    onPrimaryButtonPress: () => {ModalController.hide()},
+    onOutlineButtonPress: () => {},
+  };
+  useEffect(()=>{
+    // ModalController.show(data);
+  },[])
+  // Show
+ 
+  // Hide
+  // 
+
   return (
     <NavigationContainer>
-      <ChartsExplorer/>
+      {/* <ChartsExplorer/> */}
+      <GlobalModal
+      animationIn="fadeIn"
+      animationOut="fadeOut"
+      onBackdropPress={ModalController.hide}
+      />
+      {/* Feed list */}
+      <Stack.Navigator initialRouteName='Profile'>
+         <Stack.Screen name="Profile" component={Profile} />
+         <Stack.Screen name="Comment" component={ViewComments} />
+         <Stack.Screen name="Following" component={ViewFollowing} />
+         <Stack.Screen name="ProfileView" component={ProfileView} />
+         <Stack.Screen name="ProfileViewD" component={ProfileViewD} />
+      </Stack.Navigator>
         {/* <Stack.Navigator>
         <Stack.Screen name="ChartList" component={ChartList} />
         <Stack.Screen name="AxisLineChartScreen" component={AxisLineChartScreen} />

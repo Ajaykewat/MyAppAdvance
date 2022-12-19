@@ -22,6 +22,7 @@ import GroupBarChartScreen from "./GroupBarChartScreen";
 import InfiniteScrollLineChartScreen from "./InfiniteScrollLineChartScreen";
 import LinkageChartScreen from "./LinkageChartScreen";
 import StockChartScreen from "./StockChartScreen";
+import LensUIKet from "../screens/LensUIKet";
 
 const styles = StyleSheet.create({
   item: {
@@ -180,8 +181,11 @@ const Intro = ({navigation}) => (
 const Stack = createNativeStackNavigator();
 
 const MainScreen = () => (
-  <Stack.Navigator style={{flex: 1}}>
+  <Stack.Navigator 
+  initialRouteName="LensUIKet"
+  style={{flex: 1}}>
     <Stack.Screen name="Intro" component={Intro}/>
+    <Stack.Screen name="LensUIKet" component={LensUIKet}/>
 
     {Object.keys(ExampleRoutes).map((routeName) => (
       <Stack.Screen name={routeName} component={ExampleRoutes[routeName].screen}
